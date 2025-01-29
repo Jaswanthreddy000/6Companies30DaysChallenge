@@ -1,0 +1,16 @@
+class Solution {
+    public void wiggleSort(int[] nums) {
+       int l = nums.length;
+       Arrays.sort(nums);
+       int []copy = nums.clone();
+       int mid = (l-1)/2;
+       int end = l-1;
+       for(int i=0;i<l;i++)
+       {
+         if(i%2 == 0)
+             nums[i] = copy[mid--];
+          else
+             nums[i] = copy[end--];
+       }
+    }
+}
