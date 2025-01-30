@@ -1,0 +1,43 @@
+import java.util.HashSet;
+
+class Solution {
+    public long maximumSubarraySum(int[] nums, int k) {
+        int i = 0, j = 0, n = nums.length;
+        long sum = 0, maxSum = 0;
+        HashSet<Integer> hm = new HashSet<>();
+
+        while (i < n) {
+            int curr = nums[i];
+            if (hm.contains(curr)) {
+                while (nums[j] != curr) {
+                    hm.remove(nums[j]);
+                    sum -= nums[j];
+                    j++;
+                }
+               
+                sum -= curr;
+                hm.remove(curr);
+                j++;
+            }
+
+        
+            sum += curr;
+            hm.add(curr);
+
+           
+            while (hm.size() > k) {
+                hm.remove(nums[j]);
+                sum -= nums[j];
+                j++;
+            }
+
+           
+            if (hm.size() == k) {
+                maxSum = Math.max(maxSum, sum);
+            }
+            i++;
+        }
+
+        return maxSum;
+    }
+}
