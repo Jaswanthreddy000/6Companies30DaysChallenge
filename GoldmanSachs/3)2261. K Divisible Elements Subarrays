@@ -1,0 +1,21 @@
+class Solution {
+    public int countDistinct(int[] nums, int k, int p) {  
+        HashSet<ArrayList<Integer>> uniqueSubarrays = new HashSet<>();
+        for (int i = 0; i < nums.length; i++) {
+            ArrayList<Integer> currentSubarray = new ArrayList<>();
+            int divisibleCount = 0;
+
+            for (int j = i; j < nums.length; j++) {
+                currentSubarray.add(nums[j]);
+                if (nums[j] % p == 0) {
+                    divisibleCount++;
+                }
+                if (divisibleCount > k) {
+                    break;
+                }
+                    uniqueSubarrays.add(new ArrayList<>(currentSubarray));
+            }
+        }
+      return uniqueSubarrays.size();
+    }
+}
