@@ -1,0 +1,23 @@
+class Solution {
+    public List<List<Integer>> combinationSum3(int k, int n) {
+        List<List<Integer>> hm = new ArrayList<>();
+        csum(hm,new ArrayList<Integer>(),1,k,n);
+        return hm;
+    }
+
+    public void csum(List<List<Integer>> hm,List<Integer> ihm, int i, int k,int n)
+    {
+          if(n==0 && k==0){
+             hm.add(new ArrayList<>(ihm));
+             }
+          if(i>9 || k<0 || n<0);
+          
+          for(int start =i;start<=9;start++)
+          {
+
+              ihm.add(start);
+              csum(hm,ihm,start+1,k-1,n-start);
+              ihm.remove(ihm.size()-1);
+          }
+    }
+}
