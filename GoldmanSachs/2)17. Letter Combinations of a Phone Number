@@ -1,0 +1,32 @@
+class Solution {
+    public List<String> letterCombinations(String digits) {
+       int l = digits.length();
+       List<String> hm = new ArrayList<>();
+       if(l==0) return hm;
+       String curr="";
+       HashMap<Character,String> mp  = new HashMap<>();
+       mp.put('2',"abc");
+       mp.put('3',"def");
+       mp.put('4',"ghi");mp.put('5',"jkl");
+       mp.put('6',"mno");
+       mp.put('7',"pqrs");mp.put('8',"tuv");
+       mp.put('9',"wxyz");
+       map(0,curr,mp,hm,digits);
+       return hm;
+
+    }
+
+    public void map(int d,String curr,HashMap<Character,String> mp,List<String> hm,String digits)
+    {
+        if(d==digits.length()){
+hm.add(curr); 
+return ;
+        } 
+        String st = mp.get(digits.charAt(d));
+
+        for(int i=0;i<st.length();i++)
+        {
+            map(d+1,curr+st.charAt(i),mp,hm,digits);
+        }
+    }
+}
