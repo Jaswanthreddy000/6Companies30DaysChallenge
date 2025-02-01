@@ -1,0 +1,36 @@
+class Solution {
+    public List<Integer> largestDivisibleSubset(int[] nums) {
+        Arrays.sort(nums); // Sort the array
+        int n = nums.length;
+        int[] dp = new int[n]; // To store the size of the largest subset ending at index i
+        int[] prev = new int[n]; // To store the previous index in the subset
+        Arrays.fill(dp, 1); // Each number is a subset of size 1
+        Arrays.fill(prev, -1); // Initialize previous indices as -1
+
+        int maxIndex = 0; // Index of the largest subset
+        int maxSize = 1; // Size of the largest subset
+
+        // Fill dp and prev arrays
+        for (int i = 1; i < n; i++) {
+            for (int j = 0; j < i; j++) {
+                if (nums[i] % nums[j] == 0 && dp[i] < dp[j] + 1) {
+                    dp[i] = dp[j] + 1;
+                    prev[i] = j;
+                }
+            }
+            // Update the largest subset
+            if (dp[i] > maxSize) {
+                maxSize = dp[i];
+                maxIndex = i;
+            }
+        }
+
+        // Reconstruct the subset
+        List<Integer> result = new ArrayList<>();
+        for (int i = maxIndex; i != -1; i = prev[i]) {
+            result.add(nums[i]);
+        }
+        Collections.reverse(result); // Reverse to get the subset in the correct order
+        return result;
+    }
+}
