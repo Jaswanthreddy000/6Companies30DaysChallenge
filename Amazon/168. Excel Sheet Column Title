@@ -1,0 +1,16 @@
+class Solution {
+    public String convertToTitle(int columnNumber) {
+        int n = columnNumber;
+        if(n<26) return String.valueOf((char) (64+n));
+        String s="";
+        while(n>26)
+        {
+           int d = n%26;
+           if(d==0) d=26;
+           s = String.valueOf((char)(64+d))+s;
+           if(d==26) n=(n/26) -1;
+           else n = n/26;
+        }
+        return String.valueOf((char)(64+n))+ s;
+    }
+}
