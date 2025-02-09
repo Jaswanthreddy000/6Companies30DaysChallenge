@@ -1,0 +1,25 @@
+class Solution {
+    public int findTheDistanceValue(int[] arr1, int[] arr2, int d) {
+        Arrays.sort(arr2);
+        int k = arr2.length;
+        int count=0;
+        for(int num:arr1)
+        {
+            if(isValid(num,arr2,d))
+              count++;
+        }
+        return count;
+    }
+
+    public boolean isValid(int num,int []arr2, int d)
+    {
+        int ind = Arrays.binarySearch(arr2,num);
+        if(ind>=0) return false;
+        int ip = -ind-1;
+        if(ip < arr2.length && Math.abs(num-arr2[ip]) <=d )
+          return false;
+        if(ip>0 && Math.abs(num-arr2[ip-1])<=d)
+          return false;
+        return true;
+    }
+}
